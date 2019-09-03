@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar</title>
+</head>
+<body>
+<section  th:fragment="bar">
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info" >
+            <div class="image">
+                <img src="images/myphoto.jpg" width="48" height="48" alt="User" />
+                <!--<img th:src=@{${owner.photo}}" width="48" height="48" alt="User" />-->
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Md Yasin Arif</div>
+                <div class="email">yasin@gmail.com</div>
+                <div class="btn-group user-helper-dropdown">
+                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a th:href="@{/profile}"><i class="material-icons">person</i>Profile</a></li>
+                        <li role="seperator" class="divider"></li>
+                        <li role="seperator" class="divider"></li>
+                        <li><a th:href="@{/logout}" ><i class="material-icons">input</i>Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- #User Info -->
+        <!-- Menu -->
+        <div class="menu">
+            <ul class="list">
+                <li class="header" >MAIN NAVIGATION</li>
+                <li class="active">
+                    <a th:href="@{/}">
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_POLICE')">
+                    <a th:href="@{/police/list}">
+                        <i class="material-icons">text_fields</i>
+                        <span>Edit Profile</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_POLICE')">
+                    <a th:href="@{/police/mamberlist}">
+                        <i class="material-icons">text_fields</i>
+                        <span>Police</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_HOUSEOWNER','ROLE_POLICE')">
+                    <a th:href="@{/houseowner/list}">
+                        <i class="material-icons">layers</i>
+                        <span>House Owner</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_TENANT')">
+                    <a th:href="@{/tenant/list}">
+                        <i class="material-icons">layers</i>
+                        <span>Tenant</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_POLICE')">
+                    <a th:href="@{/rent/listforpolice}">
+                        <i class="material-icons">layers</i>
+                        <span>Tenant</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_HOUSEOWNER','ROLE_POLICE')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">assignment</i>
+                        <span>Message</span>
+                    </a>
+
+                    <ul class="ml-menu">
+                        <li sec:authorize="hasRole('ROLE_POLICE')">
+                            <a th:href="@{/houseowner/ownerlist}">House Owner</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_POLICE')">
+                            <a th:href="@{/rent/tenantnumberlist}">Tenant</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_HOUSEOWNER')">
+                            <a th:href="@{/rent/numberlistforowner}">Tenant</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li sec:authorize="hasRole('ROLE_HOUSEOWNER')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">assignment</i>
+                        <span>Rent Collection</span>
+                    </a>
+
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/collection/add/}+${id}">ADD</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/collection/list/}+${id}">List</a>
+                        </li>
+
+                    </ul>
+
+                </li>
+                <li sec:authorize="hasRole('ROLE_TENANT')">
+                    <a th:href="@{/flats}">
+                        <i class="material-icons">layers</i>
+                        <span>Flats List</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">widgets</i>
+                        <span>Admin</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li sec:authorize="hasRole('ROLE_POLICE')">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <span>Role</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a th:href="@{/role/add}">Add Role</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/role/rolelist}">Role List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <span>User</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a th:href="@{/user/add}">Add User</a>
+                                </li>
+                                <li sec:authorize="hasRole('ROLE_POLICE')">
+                                    <a th:href="@{/user/userlist}">User List</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasRole('ROLE_POLICE')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">swap_calls</i>
+                        <span>Add Location</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/country/add}">Country</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/division/add}">Division</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/district/add}">District</a>
+                        </li>
+
+                        <li>
+                            <a th:href="@{/cityCorporation/add}">CityCorporation</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/thana/add}">Thana</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li sec:authorize="hasRole('ROLE_HOUSEOWNER')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">assignment</i>
+                        <span>Building Regestation</span>
+                    </a>
+
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/building/add}">Add</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/building/list}">list</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li sec:authorize="hasRole('ROLE_HOUSEOWNER')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">assignment</i>
+                        <span>Flat Regestation</span>
+                    </a>
+
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/flat/add}">Add</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/flat/list}">list</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li sec:authorize="hasRole('ROLE_HOUSEOWNER')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">view_list</i>
+                        <span>Rents</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/rent/add}">Add Rent</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/rent/list}">Rent List</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_HOUSEOWNER','ROLE_TENANT')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">perm_media</i>
+                        <span>Family Member</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/family/add}">Add</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/family/list}">list</a>
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_HOUSEOWNER','ROLE_TENANT')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">perm_media</i>
+                        <span>Employee</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/employee/add}">Add</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/employee/list}">list</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">pie_chart</i>
+                        <span>Charts</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="pages/charts/morris.html">Morris</a>
+                        </li>
+                        <li>
+                            <a href="pages/charts/flot.html">Flot</a>
+                        </li>
+                        <li>
+                            <a href="pages/charts/chartjs.html">ChartJS</a>
+                        </li>
+                        <li>
+                            <a href="pages/charts/sparkline.html">Sparkline</a>
+                        </li>
+                        <li>
+                            <a href="pages/charts/jquery-knob.html">Jquery Knob</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">content_copy</i>
+                        <span>Example Pages</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/editable}">Editable Table</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- #Menu -->
+        <!-- Footer -->
+        <div class="legal">
+            <div class="copyright">
+                &copy;CoppyRight 2019 9 <a href="javascript:void(0);">Resident Information System BD</a>.
+            </div>
+            <div class="version">
+                <b>Version: </b> 1.9.5
+            </div>
+        </div>
+        <!-- #Footer -->
+    </aside>
+    <!-- #END# Left Sidebar -->
+    <!-- Right Sidebar -->
+    <aside id="rightsidebar" class="right-sidebar" sec:authorize="isAuthenticated()">
+        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+            <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+            <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                <ul class="demo-choose-skin">
+                    <li data-theme="red" class="active">
+                        <div class="red"></div>
+                        <span>Red</span>
+                    </li>
+                    <li data-theme="pink">
+                        <div class="pink"></div>
+                        <span>Pink</span>
+                    </li>
+                    <li data-theme="purple">
+                        <div class="purple"></div>
+                        <span>Purple</span>
+                    </li>
+                    <li data-theme="deep-purple">
+                        <div class="deep-purple"></div>
+                        <span>Deep Purple</span>
+                    </li>
+                    <li data-theme="indigo">
+                        <div class="indigo"></div>
+                        <span>Indigo</span>
+                    </li>
+                    <li data-theme="blue">
+                        <div class="blue"></div>
+                        <span>Blue</span>
+                    </li>
+                    <li data-theme="light-blue">
+                        <div class="light-blue"></div>
+                        <span>Light Blue</span>
+                    </li>
+                    <li data-theme="cyan">
+                        <div class="cyan"></div>
+                        <span>Cyan</span>
+                    </li>
+                    <li data-theme="teal">
+                        <div class="teal"></div>
+                        <span>Teal</span>
+                    </li>
+                    <li data-theme="green">
+                        <div class="green"></div>
+                        <span>Green</span>
+                    </li>
+                    <li data-theme="light-green">
+                        <div class="light-green"></div>
+                        <span>Light Green</span>
+                    </li>
+                    <li data-theme="lime">
+                        <div class="lime"></div>
+                        <span>Lime</span>
+                    </li>
+                    <li data-theme="yellow">
+                        <div class="yellow"></div>
+                        <span>Yellow</span>
+                    </li>
+                    <li data-theme="amber">
+                        <div class="amber"></div>
+                        <span>Amber</span>
+                    </li>
+                    <li data-theme="orange">
+                        <div class="orange"></div>
+                        <span>Orange</span>
+                    </li>
+                    <li data-theme="deep-orange">
+                        <div class="deep-orange"></div>
+                        <span>Deep Orange</span>
+                    </li>
+                    <li data-theme="brown">
+                        <div class="brown"></div>
+                        <span>Brown</span>
+                    </li>
+                    <li data-theme="grey">
+                        <div class="grey"></div>
+                        <span>Grey</span>
+                    </li>
+                    <li data-theme="blue-grey">
+                        <div class="blue-grey"></div>
+                        <span>Blue Grey</span>
+                    </li>
+                    <li data-theme="black">
+                        <div class="black"></div>
+                        <span>Black</span>
+                    </li>
+                </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="settings">
+                <div class="demo-settings">
+                    <p>GENERAL SETTINGS</p>
+                    <ul class="setting-list">
+                        <li>
+                            <span>Report Panel Usage</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Email Redirect</span>
+                            <div class="switch">
+                                <label><input type="checkbox"><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <p>SYSTEM SETTINGS</p>
+                    <ul class="setting-list">
+                        <li>
+                            <span>Notifications</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Auto Updates</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <p>ACCOUNT SETTINGS</p>
+                    <ul class="setting-list">
+                        <li>
+                            <span>Offline</span>
+                            <div class="switch">
+                                <label><input type="checkbox"><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Location Permission</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- #END# Right Sidebar -->
+</section>
+</body>
+</html>
