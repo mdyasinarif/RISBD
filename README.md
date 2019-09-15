@@ -6,18 +6,18 @@ Technology : Spring Boot, Maven, Spring MVC, Spring Security,Thaymlef, Hibernate
 Requirements:
 To Collect information to the residence Government want to launch web application for this purpose we think to build a web application to collect the residence (House Owner, Tenant) information. It is very easy to use any one can first registration as a user and he/she select his/her type and then login the web application and give his/her all required information. Police can see the list of the residence. 
 
-Requirements analysis
-Create User 
-Registration User
-Get House Owner Information
-House Owner can collect Rent
-ouse Owner can sent sms to Tenant
-Get Tenant Information
-Tenant can search flate
-Tenant can see the rent summary
-User can view his/her Profile
-User can Update his/her Information
-Police can see the List of Resident(House Owner & Tenant)
+Requirements analysis:
+Create User <br>
+Registration User<br>
+Get House Owner Information<br>
+House Owner can collect Rent<br>
+ouse Owner can sent sms to Tenant<br>
+Get Tenant Information<br>
+Tenant can search flate<br>
+Tenant can see the rent summary<br>
+User can view his/her Profile<br>
+User can Update his/her Information<br>
+Police can see the List of Resident(House Owner & Tenant)<br>
 Police can sent sms (House Owner & Tenant)<br>
 
 ![1 Regestation](https://user-images.githubusercontent.com/43033523/64924431-84260b80-d806-11e9-8671-857ac3ffb035.png)
