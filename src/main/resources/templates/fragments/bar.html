@@ -11,13 +11,21 @@
     <aside id="leftsidebar" class="sidebar">
         <!-- User Info -->
         <div class="user-info" >
-            <div class="image">
-                <img src="images/myphoto.jpg" width="48" height="48" alt="User" />
-                <!--<img th:src=@{${owner.photo}}" width="48" height="48" alt="User" />-->
+            <div class="image" sec:authorize="hasRole('ROLE_HOUSEOWNER')" >
+                <img th:src="${global?.photo}" width="48" height="48" alt="User" />
             </div>
+            <div class="image" sec:authorize="hasRole('ROLE_POLICE')" >
+                <img th:src="${globalp?.photo}" width="48" height="48" alt="User" />
+            </div>
+            <div class="image" sec:authorize="hasRole('ROLE_TENANT')" >
+                <img th:src="${globalt?.photo}" width="48" height="48" alt="User" />
+            </div>
+
             <div class="info-container">
-                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Md Yasin Arif</div>
-                <div class="email">yasin@gmail.com</div>
+                <div class="name" sec:authorize="hasRole('ROLE_HOUSEOWNER')" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span th:text="${global?.name}"></span></div>
+                <div class="name" sec:authorize="hasRole('ROLE_POLICE')" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span th:text="${globalp?.name}"></span></div>
+                <div class="name" sec:authorize="hasRole('ROLE_TENANT')" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span th:text="${globalt?.name}"></span></div>
+                <!--<div class="name">Email</div>-->
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
@@ -89,23 +97,7 @@
                     </ul>
 
                 </li>
-                <li sec:authorize="hasRole('ROLE_HOUSEOWNER')">
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">assignment</i>
-                        <span>Rent Collection</span>
-                    </a>
 
-                    <ul class="ml-menu">
-                        <li>
-                            <a th:href="@{/collection/add/}+${id}">ADD</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/collection/list/}+${id}">List</a>
-                        </li>
-
-                    </ul>
-
-                </li>
                 <li sec:authorize="hasRole('ROLE_TENANT')">
                     <a th:href="@{/flats}">
                         <i class="material-icons">layers</i>
@@ -171,7 +163,35 @@
 
                     </ul>
                 </li>
-
+                <li sec:authorize="hasAnyRole('ROLE_HOUSEOWNER','ROLE_TENANT')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">perm_media</i>
+                        <span>Family Member</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/family/add}">Add</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/family/list}">list</a>
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_HOUSEOWNER','ROLE_TENANT')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">perm_media</i>
+                        <span>Employee</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a th:href="@{/employee/add}">Add</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/employee/list}">list</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                 <li sec:authorize="hasRole('ROLE_HOUSEOWNER')">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">assignment</i>
@@ -219,35 +239,24 @@
 
                     </ul>
                 </li>
-                <li sec:authorize="hasAnyRole('ROLE_HOUSEOWNER','ROLE_TENANT')">
+                <li sec:authorize="hasRole('ROLE_HOUSEOWNER')">
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">perm_media</i>
-                        <span>Family Member</span>
+                        <i class="material-icons">assignment</i>
+                        <span>Rent Collection</span>
                     </a>
+
                     <ul class="ml-menu">
                         <li>
-                            <a th:href="@{/family/add}">Add</a>
+                            <a th:href="@{/collection/add/}+${id}">ADD</a>
                         </li>
                         <li>
-                            <a th:href="@{/family/list}">list</a>
+                            <a th:href="@{/collection/list/}+${id}">List</a>
                         </li>
+
                     </ul>
+
                 </li>
-                <li sec:authorize="hasAnyRole('ROLE_HOUSEOWNER','ROLE_TENANT')">
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">perm_media</i>
-                        <span>Employee</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li>
-                            <a th:href="@{/employee/add}">Add</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/employee/list}">list</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
+
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">pie_chart</i>
                         <span>Charts</span>

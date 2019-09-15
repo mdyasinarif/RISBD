@@ -19,4 +19,5 @@ public interface TenantRepo extends JpaRepository<Tenant,Long> {
     Tenant findByContractNo(String  contractNO);
     Iterable<Tenant> findAllByThana(Thana thana);
 
+
 }

@@ -25,10 +25,10 @@
                                 <th>House OwnerName</th>
                                 <th>Flat Name</th>
                                 <th>Tenant Name</th>
+                                <th>Photo</th>
                                 <th>Rant Amount</th>
                                 <th>Rant Date</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+
                             </tr>
                             <tr th:each="rent : ${list}">
                                 <td th:text="${rent.id}"></td>
@@ -44,11 +44,9 @@
                                 <td>
                                     <span  th:each="tenant : ${rent.tenant}" th:text="${tenant.name}+' '"></span>
                                 </td>
+                                <td><img th:src="@{${rent?.tenant.photo}}" width="100" height="120"/></td>
                                 <td th:text="${rent.rentAmount}"></td>
                                 <td th:text="${rent.rentdate}"></td>
-
-                                <td><a th:href="@{'/rent/edit/' + ${rent.id}}"><button type="button" class="btn btn-round btn-success">Edit</button></a></td>
-                                <td><a th:href="@{'/rent/del/' + ${rent.id}}"><button type="button" class="btn btn-round btn-danger">DELETE</button></a></td>
                             </tr>
                         </table>
                     </div>

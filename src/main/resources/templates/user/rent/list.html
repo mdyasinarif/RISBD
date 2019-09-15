@@ -29,8 +29,8 @@
                                 <th>Contract No</th>
                                 <th>Rant Amount</th>
                                 <th>Rant Date</th>
-                                <th sec:authorize="hasRole('ROLE_HOUSEOWNER')">Edit</th>
-                                <th sec:authorize="hasRole('ROLE_HOUSEOWNER')">Delete</th>
+                                <th sec:authorize="hasRole('ROLE_HOUSEOWNER')">View</th>
+                                <th sec:authorize="hasRole('ROLE_HOUSEOWNER')">Collection</th>
                             </tr>
                             <tr th:each="rent : ${list}">
                                 <td th:text="${rent.id}"></td>
@@ -51,8 +51,8 @@
                                 <td th:text="${rent.rentAmount}"></td>
                                 <td th:text="${rent.rentdate}"></td>
 
-                                <td sec:authorize="hasRole('ROLE_HOUSEOWNER')"><a th:href="@{'/collection/add/' + ${rent.id}}"><button type="button" class="btn btn-round btn-success">Collection</button></a></td>
                                 <td sec:authorize="hasRole('ROLE_HOUSEOWNER')"><a th:href="@{'/collection/list/' + ${rent.flat.id}}"><button type="button" class="btn btn-round btn-success">View</button></a></td>
+                                <td sec:authorize="hasRole('ROLE_HOUSEOWNER')"><a th:href="@{'/collection/add/' + ${rent.id}}"><button type="button" class="btn btn-round btn-success">Collection</button></a></td>
 
                             </tr>
                         </table>

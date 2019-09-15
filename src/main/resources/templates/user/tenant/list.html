@@ -30,6 +30,7 @@
                                 <th>Income</th>
 
                                 <th>Photo</th>
+                                <th>Paid Rant</th>
 
                                 <th colspan="2" style="text-align: center">Action</th>
 
@@ -48,6 +49,7 @@
                                 <td><img th:src="@{${tenant?.photo}}" width="100" height="120"/></td>
 
 
+                                <td><a th:href="@{'/collection/paidrent/' + ${tenant.id}}"><button type="button" class="btn btn-round btn-success">Paid Rent</button></a></td>
                                 <td><a th:href="@{'/tenant/edit/' + ${tenant.id}}"><button type="button" class="btn btn-round btn-success">Edit</button></a></td>
                                 <td><a th:href="@{'/tenant/del/' + ${tenant.id}}"><button type="button" class="btn btn-round btn-danger">DELETE</button></a></td>
                             </tr>
@@ -59,9 +61,5 @@
         </div>
     </section>
 </div>
-
-
-
-
 </body>
 </html>

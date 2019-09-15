@@ -7740,12 +7740,12 @@ fieldset[disabled] .form-control {
       display: block;
       width: 100%;
       text-align: center;
-      color: #fff; }
+      color: #2512d4; }
     .login-page .login-box .logo small {
       display: block;
       width: 100%;
       text-align: center;
-      color: #fff;
+      color: #2512d4;
       margin-top: -5px; }
 
 /* Sign Up Page ================================ */
@@ -8041,7 +8041,7 @@ html.ie11 .bs-searchbox .form-control {
   width: 90%; }
 
 body{
-  background:url('../images/background.jpg') fixed;
+  background:url('../images/background_3.jpg') fixed;
   background-repeat: no-repeat ;
   background-size: cover;
 }
